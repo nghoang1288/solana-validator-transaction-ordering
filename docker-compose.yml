@@ -1,0 +1,12 @@
+services:
+  solana-validator-ordering:
+    build: .
+    container_name: solana-validator-ordering
+    environment:
+      - SOLANA_RPC_URL=${SOLANA_RPC_URL:-https://api.mainnet-beta.solana.com}
+      - DRY_RUN=true
+      - MAX_FEE_SPEND_SOL=0.05
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+    command: ["--cohort-eval", "--dry-run"]
